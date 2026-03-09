@@ -52,9 +52,13 @@ button:hover{background:#00a844}
 </div>
 
 <div id="cart">
-<h2>Carrito</h2>
-<div id="cart-items"></div>
-<div class="total">Total: $<span 
+    <h2>Tu Carrito</h2>
+    <div id="cart-items"></div>
+    <div class="total">Total: $<span id="total">0</span></div>
+    <button onclick="finalizarCompra()" style="width:100%; margin-top:20px; background:#00c853; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer; font-weight:bold;">
+        Finalizar por WhatsApp
+    </button>
+</div>
 
 <button onclick="finalizarCompra()" style="width:100%; margin-top:20px;">Finalizar por WhatsApp</button>
 
