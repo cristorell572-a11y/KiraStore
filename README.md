@@ -54,7 +54,11 @@ button:hover{background:#00a844}
 <div id="cart">
 <h2>Carrito</h2>
 <div id="cart-items"></div>
-<div class="total">Total: $<span id="total">0</span></div>
+<div class="total">Total: $<span 
+
+<button onclick="finalizarCompra()" style="width:100%; margin-top:20px;">Finalizar por WhatsApp</button>
+
+id="total">0</span></div>
 </div>
 
 <script>
@@ -81,7 +85,19 @@ total+=item.price;
 
 document.getElementById('total').textContent=total;
 }
-</script>
+</script function finalizarCompra() {
+    if (carrito.length === 0) return alert("El carrito está vacío");
+    
+    let mensaje = "Hola KiraSTORE! Quiero comprar:%0A";
+    carrito.forEach(p => {
+        mensaje += `- ${p.nombre} ($${p.precio})%0A`;
+    });
+    mensaje += "%0A*Total: $" + document.getElementById("total").innerText + "*";
+    
+   
+    window.open(`https://wa.me/5491135879173?text=${mensaje}`);
+}
+>
 
 </body>
 </html>
