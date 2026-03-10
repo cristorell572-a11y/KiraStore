@@ -9,34 +9,21 @@
         header { background: #000; padding: 20px; text-align: center; border-bottom: 2px solid #00c853; }
         h1 { margin: 0; color: #00c853; }
         .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #1c1c1c; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; transition: 0.3s; }
+        .card { background: #1c1c1c; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; }
         .card:hover { border-color: #00c853; transform: translateY(-5px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
         
-        button { background: #00c853; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        select { margin-bottom: 10px; padding: 8px; border-radius: 5px; background: #333; color: #fff; border: 1px solid #00c853; cursor: pointer; }
+        
+        button { background: #00c853; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: auto; }
         button:hover { background: #00a844; }
 
         /* Carrito Lateral */
         #cart { position: fixed; right: 0; top: 0; background: #000; width: 300px; height: 100%; padding: 20px; overflow-y: auto; border-left: 2px solid #00c853; box-sizing: border-box; }
         #cart h2 { text-align: center; margin-top: 0; }
         
-        .cart-item { 
-            border-bottom: 1px solid #333; 
-            padding: 15px 0; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            font-size: 14px; 
-        }
-
-        .cart-item button { 
-            background: #ff4444; 
-            padding: 5px 10px; 
-            margin-top: 0; 
-            font-size: 12px;
-            border-radius: 3px;
-        }
-        
+        .cart-item { border-bottom: 1px solid #333; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+        .cart-item button { background: #ff4444; padding: 5px 10px; font-size: 12px; margin-top: 0; }
         .cart-item button:hover { background: #cc0000; }
 
         .total { font-size: 22px; margin-top: 20px; font-weight: bold; text-align: center; border-top: 1px solid #00c853; padding-top: 10px; }
@@ -60,28 +47,48 @@
         <img src="https://t4.ftcdn.net/jpg/04/79/11/23/360_F_479112366_dku6Ufwd9OVnRB3AZxonMgRzuZYeTTYY.jpg" alt="Nike">
         <h3>Nike Air Force 1</h3>
         <p>$220.000</p>
-        <button onclick="addToCart('Nike Air Force 1', 220000)">Agregar al carrito</button>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-nike">
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+            <option value="42">42</option>
+        </select>
+        <button onclick="prepararCompra('Nike Air Force 1', 220000, 'talle-nike')">Agregar al carrito</button>
     </div>
 
     <div class="card">
         <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519" alt="Adidas">
         <h3>Adidas Superstar</h3>
         <p>$110.000</p>
-        <button onclick="addToCart('Adidas Superstar', 110000)">Agregar al carrito</button>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-adidas">
+            <option value="36">36</option>
+            <option value="37">37</option>
+            <option value="38">38</option>
+            <option value="39">39</option>
+        </select>
+        <button onclick="prepararCompra('Adidas Superstar', 110000, 'talle-adidas')">Agregar al carrito</button>
     </div>
 
     <div class="card">
         <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a" alt="Puma">
         <h3>Puma RS-X</h3>
         <p>$100.000</p>
-        <button onclick="addToCart('Puma RS-X', 100000)">Agregar al carrito</button>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-puma">
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+        </select>
+        <button onclick="prepararCompra('Puma RS-X', 100000, 'talle-puma')">Agregar al carrito</button>
     </div>
 </div>
 
 <div id="cart">
     <h2>Tu Carrito</h2>
-    <div id="cart-items">
-        </div>
+    <div id="cart-items"></div>
     <div class="total">Total: $<span id="total">0</span></div>
     <button onclick="finalizarCompra()" style="width:100%; margin-top:20px; background:#25d366;">
         Finalizar por WhatsApp
@@ -91,19 +98,27 @@
 <script>
     let cart = [];
 
-    function addToCart(name, price) {
-        const itemExistente = cart.find(item => item.name === name);
+    // Función que lee el selector y envía al carrito
+    function prepararCompra(name, price, selectId) {
+        const talleSeleccionado = document.getElementById(selectId).value;
+        addToCart(name, price, talleSeleccionado);
+    }
+
+    function addToCart(name, price, size) {
+        // Buscamos si ya existe el par Nombre + Talle exacto
+        const itemExistente = cart.find(item => item.name === name && item.size === size);
 
         if (itemExistente) {
             itemExistente.cantidad += 1;
         } else {
-            cart.push({ name, price, cantidad: 1 });
+            cart.push({ name, price, size, cantidad: 1 });
         }
         renderCart();
     }
 
-    function removeFromCart(name) {
-        cart = cart.filter(item => item.name !== name);
+    function removeFromCart(name, size) {
+        // Solo eliminamos la combinación específica de nombre y talle
+        cart = cart.filter(item => !(item.name === name && item.size === size));
         renderCart();
     }
 
@@ -119,11 +134,11 @@
             div.innerHTML = `
                 <div>
                     <strong>${item.name}</strong> <br>
-                    <small>$${item.price.toLocaleString()} x ${item.cantidad}</small>
+                    <small>Talle: ${item.size} | $${item.price.toLocaleString()} x ${item.cantidad}</small>
                 </div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <span>$${(item.price * item.cantidad).toLocaleString()}</span>
-                    <button onclick="removeFromCart('${item.name}')">X</button>
+                    <button onclick="removeFromCart('${item.name}', '${item.size}')">X</button>
                 </div>
             `;
             cartItems.appendChild(div);
@@ -141,7 +156,7 @@
         
         let mensaje = "Hola KiraSTORE! Quiero comprar:%0A%0A";
         cart.forEach(item => {
-            mensaje += `* ${item.name} (x${item.cantidad}) - $${(item.price * item.cantidad).toLocaleString()}%0A`;
+            mensaje += `* ${item.name} (Talle: ${item.size}) x${item.cantidad} - $${(item.price * item.cantidad).toLocaleString()}%0A`;
         });
         
         const totalFinal = document.getElementById('total').innerText;
@@ -153,4 +168,5 @@
 
 </body>
 </html>
+
 
