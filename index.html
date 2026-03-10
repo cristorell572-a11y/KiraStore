@@ -89,7 +89,7 @@
 <div id="cart">
     <h2>Tu Carrito</h2>
     <div id="cart-items"></div>
-    <div class="total">Total: $<span id="total">0</span></div>
+    <div class="total">Total: <span id="total" data-valor-final="0">0</span></div>
     <button onclick="finalizarCompra()" style="width:100%; margin-top:20px; background:#25d366;">
         Finalizar por WhatsApp
     </button>
@@ -98,16 +98,13 @@
 <script>
     let cart = [];
 
-    // Función que lee el selector y envía al carrito
     function prepararCompra(name, price, selectId) {
         const talleSeleccionado = document.getElementById(selectId).value;
         addToCart(name, price, talleSeleccionado);
     }
 
     function addToCart(name, price, size) {
-        // Buscamos si ya existe el par Nombre + Talle exacto
         const itemExistente = cart.find(item => item.name === name && item.size === size);
-
         if (itemExistente) {
             itemExistente.cantidad += 1;
         } else {
@@ -117,7 +114,6 @@
     }
 
     function removeFromCart(name, size) {
-        // Solo eliminamos la combinación específica de nombre y talle
         cart = cart.filter(item => !(item.name === name && item.size === size));
         renderCart();
     }
@@ -126,7 +122,9 @@
         const cartItems = document.getElementById('cart-items');
         const totalSpan = document.getElementById('total');
         cartItems.innerHTML = '';
-        let total = 0;
+        
+        let subtotal = 0;
+        let totalArticulos = 0;
 
         cart.forEach(item => {
             const div = document.createElement('div');
@@ -142,10 +140,29 @@
                 </div>
             `;
             cartItems.appendChild(div);
-            total += item.price * item.cantidad;
+            
+            subtotal += item.price * item.cantidad;
+            totalArticulos += item.cantidad;
         });
 
-        totalSpan.innerText = total.toLocaleString();
+        let totalFinal = subtotal;
+        let mensajeDescuento = "";
+
+        if (totalArticulos >= 2) {
+            const descuento = subtotal * 0.20; 
+            totalFinal = subtotal - descuento;
+            mensajeDescuento = `<div style="color: #25d366; font-size: 14px; margin-top: 5px;">¡20% OFF aplicado!</div>`;
+        }
+
+        totalSpan.innerHTML = `
+            <span style="${totalArticulos >= 2 ? 'text-decoration: line-through; font-size: 16px; color: #888;' : ''}">
+                $${subtotal.toLocaleString()}
+            </span><br>
+            $${totalFinal.toLocaleString()}
+            ${mensajeDescuento}
+        `;
+        
+        totalSpan.dataset.valorFinal = totalFinal.toLocaleString();
     }
 
     function finalizarCompra() {
@@ -155,18 +172,22 @@
         }
         
         let mensaje = "Hola KiraSTORE! Quiero comprar:%0A%0A";
+        let totalArticulos = 0;
         cart.forEach(item => {
-            mensaje += `* ${item.name} (Talle: ${item.size}) x${item.cantidad} - $${(item.price * item.cantidad).toLocaleString()}%0A`;
+            mensaje += `* ${item.name} (Talle: ${item.size}) x${item.cantidad}%0A`;
+            totalArticulos += item.cantidad;
         });
         
-        const totalFinal = document.getElementById('total').innerText;
-        mensaje += "%0A*Total a pagar: $" + totalFinal + "*";
+        const totalConDescuento = document.getElementById('total').dataset.valorFinal;
         
+        if (totalArticulos >= 2) {
+            mensaje += "%0A*¡Descuento del 20% aplicado por llevar 2 o más!*";
+        }
+        
+        mensaje += "%0A%0A*Total a pagar: $" + totalConDescuento + "*";
         window.open(`https://wa.me/5491135879173?text=${mensaje}`);
     }
 </script>
 
 </body>
 </html>
-
-
