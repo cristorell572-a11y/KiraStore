@@ -1,50 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KiraSTORE - Zapatillas y Ropa Deportiva</title>
-    <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #111; color: #fff; padding-right: 320px; }
-        header { background: #000; padding: 20px; text-align: center; border-bottom: 2px solid #00c853; }
-        h1 { margin: 0; color: #00c853; letter-spacing: 2px; }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
-        
-        .card { background: #1c1c1c; padding: 15px; border-radius: 10px; text-align: center; border: 1px solid #333; transition: 0.3s; display: flex; flex-direction: column; }
-        .card:hover { border-color: #00c853; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,200,83,0.2); }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
-        
-        select { margin-bottom: 15px; padding: 8px; border-radius: 5px; background: #333; color: #fff; border: 1px solid #00c853; cursor: pointer; outline: none; }
-        
-        button { background: #00c853; color: #fff; border: none; padding: 12px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: auto; transition: 0.2s; }
-        button:hover { background: #00a844; }
-
-        /* Carrito Lateral */
-        #cart { position: fixed; right: 0; top: 0; background: #000; width: 300px; height: 100%; padding: 20px; overflow-y: auto; border-left: 2px solid #00c853; box-sizing: border-box; display: flex; flex-direction: column; }
-        #cart h2 { text-align: center; margin-top: 0; color: #00c853; }
-        
-        #cart-items { flex-grow: 1; }
-        .cart-item { border-bottom: 1px solid #333; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; font-size: 14px; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
-        
-        .cart-item button { background: #ff4444; padding: 5px 10px; font-size: 12px; margin-top: 0; border: none; border-radius: 3px; color: white; cursor: pointer; }
-
-        .total { font-size: 18px; margin-top: 20px; font-weight: bold; text-align: center; border-top: 1px solid #00c853; padding-top: 10px; }
-
-        @media (max-width: 768px) {
-            body { padding-right: 0; padding-bottom: 350px; }
-            #cart { width: 100%; height: 350px; top: auto; bottom: 0; border-left: none; border-top: 2px solid #00c853; }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>KiraSTORE</h1>
-    <p>Zapatillas y Ropa Deportiva</p>
-</header>
-
 <div class="container">
+
     <div class="card">
         <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/cdad5a382b4d4d5cb9178ccd89e891b9_9366/Zapatillas_Lightshift_Blanco_JH9317_01_00_standard.jpg" alt="Adidas LIGHTSHIFT">
         <h3>Adidas LIGHTSHIFT</h3>
@@ -70,6 +25,72 @@
     </div>
 
     <div class="card">
+        <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2ed089cbcdf948388cccb40f1eeb07e6_9366/Zapatillas_VS_Pace_2.0_Ninos_Azul_IE8886_01_standard.jpg" alt="Adidas VS PACE 2.0 NIÑOS">
+        <h3>Adidas VS PACE 2.0 NIÑOS</h3>
+        <p>$75.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-pace">
+            <option value="31,5">31,5</option>
+        </select>
+        <button onclick="prepararCompra('Adidas Grand Court Alpha', 75000, 'talle-pace')">Agregar al carrito</button>
+    </div>
+
+     <div class="card">
+        <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/08bc15a196d8498493221a126b43b8e0_9366/Zapatillas_Response_Super_Negro_IG1421_04_standard.jpg" alt="Adidas RESPONSE SUPER">
+        <h3>Adidas RESPONSE SUPER</h3>
+        <p>$100.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-super">
+            <option value="41">41</option>
+        </select>
+        <button onclick="prepararCompra('Adidas RESPONSE SUPER', 100000, 'talle-super')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d26a54be82944a39b5b857481d9d7c97_9366/Zapatillas_Tensaur_Run_3.0_para_Ninos_Blanco_IE6016_01_00_standard.jpg" alt="Adidas TENSAUR RUN 3.0">
+        <h3>Adidas TENSAUR RUN 3.0</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-run">
+            <option value="22">22</option>
+        </select>
+        <button onclick="prepararCompra('Adidas TENSAUR RUN 3.0', 60000, 'talle-run')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/760c725c0270455fa1307020b59e15a8_9366/Zapatillas_Tensaur_Run_3.0_para_Ninos_Blanco_IE6015_01_00_standard.jpg" alt="Adidas TENSAUR RUN 3.0">
+        <h3>Adidas TENSAUR RUN 3.0</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-rose">
+            <option value="23">23</option>
+        </select>
+        <button onclick="prepararCompra('Adidas TENSAUR RUN 3.0', 60000, 'talle-rose')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://tshop.r10s.jp/glasse-japan/cabinet/07342303/imgrc0083624315.jpg?fitin=720%3A720" alt="Nike FLEX 2018 Bebé">
+        <h3>Nike FLEX 2018 Bebé</h3>
+        <p>$55.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-flex">
+            <option value="8cm">8cm</option>
+        </select>
+        <button onclick="prepararCompra('Nike FLEX 2018 Bebé', 55000, 'talle-flex')">Agregar al carrito</button>
+    </div>
+
+     <div class="card">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_840913-MLA83177938955_032025-O.jpg" alt="Nike Downshifter Bebe">
+        <h3>Nike Downshifter Bebé</h3>
+        <p>$55.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-ter">
+            <option value="8cm">8cm</option>
+        </select>
+        <button onclick="prepararCompra('Nike Downshifter Bebé', 55000, 'talle-ter')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
         <img src="https://sportotalar.vtexassets.com/arquivos/ids/639925/389390-45-21015-PUMA-WHITE-STRONG-GRAY-ROSE-QUARTZ_1.png?v=638842326664800000" alt="Puma Carina">
         <h3>PUMA CARINA STREET</h3>
         <p>$90.000</p>
@@ -82,13 +103,245 @@
         <button onclick="prepararCompra('PUMA CARINA STREET', 90000, 'talle-carina')">Agregar al carrito</button>
     </div>
 
+    <div class="card">
+        <img src="https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/396578/02/fnd/ARG/fmt/png" alt="Puma XL">
+        <h3>PUMA XL KIDS</h3>
+        <p>$75.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-PumaXL">
+            <option value="21">21</option>
+            <option value="24">24</option>
+            <option value="26">26</option>
+        </select>
+        <button onclick="prepararCompra('PUMA XL KIDS', 75000, 'talle-PumaXL')">Agregar al carrito</button>
     </div>
+
+    <div class="card">
+        <img src="https://chelseaio.vtexassets.com/arquivos/ids/565385-1200-auto?v=638935429926600000" alt="Puma Ca Pro Classic">
+        <h3>Puma Ca Pro Classic</h3>
+        <p>$110.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-capro-classic">
+            <option value="39,5">39,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma Ca Pro Classic', 110000, 'talle-capro-classic')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://ferreira.vtexassets.com/arquivos/ids/541985-1200-auto?v=638878573479630000" alt="Puma Karmen II Idol SD">
+        <h3>Puma Karmen II Idol SD</h3>
+        <p>$90.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-karmen">
+            <option value="39,5">39,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma Karmen II Idol SD', 90000, 'talle-karmen')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://essential.vtexassets.com/arquivos/ids/1623665-1200-auto?v=638838779396270000" alt="Puma CARINA 3.0 LUXE">
+        <h3>Puma CARINA 3.0 LUXE</h3>
+        <p>$85.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-carina30">
+            <option value="36,5">36,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma CARINA 3.0 LUXE', 85000, 'talle-carina30')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
+        <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1200,h_1200/global/392033/11/fnd/PNA/fmt/png" alt="Puma Smash 3.0">
+        <h3>Puma Smash 3.0 kids</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-smash30">
+            <option value="23">23</option>
+        </select>
+        <button onclick="prepararCompra('Puma Smash 3.0 kids', 60000, 'talle-smash30')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
+        <img src="https://www.moov.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dwbc3c4e10/products/PU382278-29/PU382278-29-6.JPG" alt="Puma Ca Pro Classic kids">
+        <h3>Puma Ca Pro Classic kids</h3>
+        <p>$70.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-capro-kids">
+            <option value="33">33</option>
+        </select>
+        <button onclick="prepararCompra('Puma Ca Pro Classic kids', 70000, 'talle-capro-kids')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://essential.vtexassets.com/arquivos/ids/1685252-1200-auto?v=638892986841400000" alt="Puma Ca Pro Mujer">
+        <h3>Puma Ca Pro Mujer</h3>
+        <p>$110.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-capro-mujer"> 
+            <option value="37,5">37,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma Ca Pro Mujer', 110000, 'talle-capro-mujer')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.precialo.com/products/zapatillas-puma-puma-rebound-v6-lo-ac-ps-adp-de-nino-talle-33/6915e58e-24c9-45ff-b10e-bb827ad36fc8.jpeg" alt="Puma Rebound V6">
+        <h3>Puma Rebound V6</h3>
+        <p>$65.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-v6"> 
+            <option value="32">32</option>
+        </select>
+        <button onclick="prepararCompra('Puma Rebound V6', 65000, 'talle-v6')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://production.cdn.vaypol.com/variants/ipe87a94hb5axnkbyfffb6a7dheh/e82c8d6171dd25bb538f2e7263b5bc7dfc6a79352d85923074be76df53fbc6f4" alt="Puma Rebound V6 Lo">
+        <h3>Puma Rebound V6 Lo</h3>
+        <p>$65.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-v6lo"> 
+            <option value="27">27</option>
+        </select>
+        <button onclick="prepararCompra('Puma Rebound V6 Lo', 65000, 'talle-v6lo')">Agregar al carrito</button>
+    </div>
+
+     <div class="card">
+        <img src="https://www.tripstore.com.ar/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/3/9/39083901_7.jpg" alt="Puma Trinity">
+        <h3>Puma Trinity</h3>
+        <p>$55.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-trinity"> 
+            <option value="31">31</option>
+        </select>
+        <button onclick="prepararCompra('Puma Trinity', 55000, 'talle-trinity')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">       
+        <img src="https://www-cdn.solodeportes.com.ar/media/catalog/product/z/a/zapatillas-puma-smash-v2-ni-o-ni-a-negra-640010368727001-1-1.jpg?width=700" alt="Puma SMASH V2">
+        <h3>Puma SMASH V2</h3>
+        <p>$70.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-smashv2-black"> 
+            <option value="35">35</option>
+        </select>
+        <button onclick="prepararCompra('Puma SMASH V2', 70000, 'talle-smashv2-black')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_682928-MLA71544081233_092023-O.jpg" alt="Puma Smash V2 Lps Kids Blanco">
+        <h3>Smash V2 Lps Kids Blanco</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-smashv2-white"> 
+            <option value="30">30</option>
+        </select>
+        <button onclick="prepararCompra('Smash V2 Lps Blanco', 60000, 'talle-smashv2-white')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
+        <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1200,h_1200/global/371128/01/fnd/EEA/fmt/png/Zapatillas-Anzarun-Lite" alt="Puma Anzarun Lite">
+        <h3>Puma Anzarun Lite</h3>
+        <p>$80.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-lite"> 
+            <option value="41,5">41,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma Anzarun Lite', 80000, 'talle-lite')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://showsport.vtexassets.com/arquivos/ids/928260-1200-auto?v=638944249059230000" alt="Puma TURINO II OG">
+        <h3>Puma TURINO II OG</h3>
+        <p>$90.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-og"> 
+            <option value="41">41</option>
+        </select>
+        <button onclick="prepararCompra('Puma TURINO II OG', 90000, 'talle-og')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
+        <img src="https://assets.levelshoes.com/cdn-cgi/image/width=720,height=1008,quality=85,format=webp/media/catalog/product/3/9/399025-01_7.jpg" alt="Puma Easy Rider Mix">
+        <h3>Puma Easy Rider Mix</h3>
+        <p>$95.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-mix"> 
+            <option value="40">40</option>
+        </select>
+        <button onclick="prepararCompra('Puma Easy Rider Mix', 95000, 'talle-mix')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/310789/13/fnd/ARG/fmt/png" alt="Puma Electrify NITRO™">
+        <h3>Puma Electrify NITRO™</h3>
+        <p>$100.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-tm"> 
+            <option value="43,5">43,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma Electrify NITRO™', 100000, 'talle-tm')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www.tradeinn.com/f/14175/141758649/puma-zapatillas-running-softride-harli.webp" alt="Puma Softride Harli">
+        <h3>Puma running Softride Harli</h3>
+        <p>$80.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-harli"> 
+            <option value="36,5">36,5</option>
+        </select>
+        <button onclick="prepararCompra('Puma running Softride Harli', 80000, 'talle-harli')">Agregar al carrito</button>
+    </div>
+    
+    <div class="card">
+        <img src="https://production.cdn.vaypol.com/variants/itvc1k4s2lierszxv5jjpjte8up6/e82c8d6171dd25bb538f2e7263b5bc7dfc6a79352d85923074be76df53fbc6f4" alt="Future 8 Match">
+        <h3>Botines Puma Future 8 Match Tt</h3>
+        <p>$55.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-future"> 
+            <option value="43,5">43,5</option>
+        </select>
+        <button onclick="prepararCompra('Botines Puma Future 8 Match Tt', 55000, 'talle-future')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://http2.mlstatic.com/D_NQ_NP_809328-MLA106976060272_022026-O.jpg" alt="Puma Caven 2.0">
+        <h3>Puma Caven 2.0 Sportstyle Infant</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-caven20">
+            <option value="23">23</option>
+        </select>
+        <button onclick="prepararCompra('Puma Caven 2.0 Sportstyle Infant', 60000, 'talle-caven20')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/312415/01/fnd/ARG/fmt/png" alt="Puma Skyrocket 2">
+        <h3>Puma Skyrocket 2</h3>
+        <p>$60.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-skyrocket">
+            <option value="24">24</option>
+        </select>
+        <button onclick="prepararCompra('Puma Skyrocket 2', 60000, 'talle-skyrocket')">Agregar al carrito</button>
+    </div>
+
+    <div class="card">
+        <img src="https://www-cdn.solodeportes.com.ar/media/catalog/product/b/o/botines-de-futbol-puma-future-4-3-fg-ag-ni-o-ni-a-naranja-640010106979001-1.jpg?width=700" alt="Puma Future 4.3">
+        <h3>BOTINES DE FUTBOL PUMA FUTURE 4.3</h3>
+        <p>$40.000</p>
+        <label style="font-size: 12px; color: #aaa;">Talle:</label>
+        <select id="talle-future43">
+            <option value="29">29</option>
+        </select>
+        <button onclick="prepararCompra('BOTINES DE FUTBOL PUMA FUTURE 4.3', 40000, 'talle-future43')">Agregar al carrito</button>
+    </div>
+</div>
 
 <div id="cart">
     <h2>Tu Carrito</h2>
     <div id="cart-items"></div>
-    <div class="total" id="total-container">Total: <span id="total-val">$0</span></div>
-    <button onclick="finalizarCompra()" style="width:100%; margin-top:20px; background:#25d366; color: #000; font-weight: bold; padding: 15px; border: none; border-radius: 5px; cursor: pointer;">
+    <div class="total">Total: <span id="total" data-valor-final="0">0</span></div>
+    <button onclick="finalizarCompra()" style="width:100%; margin-top:20px; background:#25d366; color: #000;">
         Finalizar por WhatsApp
     </button>
 </div>
@@ -103,7 +356,6 @@
     }
 
     function addToCart(name, price, size) {
-        // Buscamos si ya existe el producto con ese talle específico
         const itemExistente = cart.find(item => item.name === name && item.size === size);
         if (itemExistente) {
             itemExistente.cantidad += 1;
@@ -120,7 +372,7 @@
 
     function renderCart() {
         const cartItems = document.getElementById('cart-items');
-        const totalContainer = document.getElementById('total-container');
+        const totalSpan = document.getElementById('total');
         cartItems.innerHTML = '';
         
         let subtotal = 0;
@@ -140,6 +392,7 @@
                 </div>
             `;
             cartItems.appendChild(div);
+            
             subtotal += item.price * item.cantidad;
             totalArticulos += item.cantidad;
         });
@@ -147,23 +400,22 @@
         let totalFinal = subtotal;
         let mensajeDescuento = "";
 
+        // Lógica de descuento del 10% por llevar 2 o más productos
         if (totalArticulos >= 2) {
             const descuento = subtotal * 0.10; 
             totalFinal = subtotal - descuento;
-            mensajeDescuento = `<div style="color: #00c853; font-size: 14px;">¡10% OFF aplicado!</div>`;
+            mensajeDescuento = `<div style="color: #00c853; font-size: 14px; margin-top: 5px;">¡10% OFF aplicado!</div>`;
         }
 
-        totalContainer.innerHTML = `
-            <div style="${totalArticulos >= 2 ? 'text-decoration: line-through; font-size: 14px; color: #888;' : ''}">
-                Subtotal: $${subtotal.toLocaleString()}
-            </div>
-            <div>Total: $${totalFinal.toLocaleString()}</div>
+        totalSpan.innerHTML = `
+            <span style="${totalArticulos >= 2 ? 'text-decoration: line-through; font-size: 16px; color: #888;' : ''}">
+                $${subtotal.toLocaleString()}
+            </span><br>
+            $${totalFinal.toLocaleString()}
             ${mensajeDescuento}
         `;
         
-        // Guardamos valores para el mensaje de WhatsApp
-        totalContainer.dataset.valorFinal = totalFinal.toLocaleString();
-        totalContainer.dataset.subtotal = subtotal.toLocaleString();
+        totalSpan.dataset.valorFinal = totalFinal.toLocaleString();
     }
 
     function finalizarCompra() {
@@ -172,33 +424,20 @@
             return;
         }
         
-        let mensaje = "¡Hola KiraSTORE! 👋 Quiero realizar este pedido:%0A%0A";
+        let mensaje = "Hola KiraSTORE! Quiero comprar:%0A%0A";
         let totalArticulos = 0;
-
-        cart.forEach((item, index) => {
-            let itemSubtotal = item.price * item.cantidad;
-            mensaje += `*Producto ${index + 1}:*%0A`;
-            mensaje += `👟 ${item.name}%0A`;
-            mensaje += `📏 Talle: ${item.size}%0A`;
-            mensaje += `🔢 Cantidad: ${item.cantidad}%0A`;
-            mensaje += `💰 Precio unitario: $${item.price.toLocaleString()}%0A`;
-            mensaje += `💵 Subtotal: $${itemSubtotal.toLocaleString()}%0A`;
-            mensaje += "--------------------------%0A";
+        cart.forEach(item => {
+            mensaje += `* ${item.name} (Talle: ${item.size}) x${item.cantidad}%0A`;
             totalArticulos += item.cantidad;
         });
         
-        const subtotalGral = document.getElementById('total-container').dataset.subtotal;
-        const totalFinal = document.getElementById('total-container').dataset.valorFinal;
-        
-        mensaje += `%0A*RESUMEN DE COMPRA*%0A`;
-        mensaje += `Suma total: $${subtotalGral}%0A`;
+        const totalConDescuento = document.getElementById('total').dataset.valorFinal;
         
         if (totalArticulos >= 2) {
-            mensaje += "🎁 Descuento: 10% OFF (por 2+ productos)%0A";
+            mensaje += "%0A*¡Descuento del 10% aplicado por llevar 2 o más!*";
         }
         
-        mensaje += `%0A*🔥 TOTAL A PAGAR: $${totalFinal}*`;
-        
+        mensaje += "%0A%0A*Total a pagar: $" + totalConDescuento + "*";
         window.open(`https://wa.me/5491135879173?text=${mensaje}`);
     }
 </script>
